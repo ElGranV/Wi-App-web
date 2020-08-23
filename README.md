@@ -1,2 +1,2 @@
 # Wi-App-web
-Version d'entraînement au dev web de l'app wi-bash
+Application wi-bash sous forme de page web. Version d'entraînement personnel au dev web. Possibilité de développement vers une PWA.
