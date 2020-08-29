@@ -6,7 +6,8 @@ function MyButton(titre, couleur = red, bg = "white")
     bouton.style.color = couleur;
     bouton.style.backgroundColor = bg;
     bouton.textContent = titre;
-    return bouton;s
+    return bouton;
+    //
     
 }
 
