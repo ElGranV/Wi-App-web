@@ -34,21 +34,27 @@ textarea:focus, input:focus, button:focus{
     box-shadow: 0px 2px 2px 4px rgba(0,0,0,0.1);
     white-space: nowrap;
     align-self: center;
-    
+    transition-duration: 0.4s;
     
 }
+
 #connect
 {
     background-color: white;
     color : rgb(222,5,0);
     
 }
+#connect:hover{
+    box-shadow: 0px 2px 4px 5px rgba(0,0,0,0.3);;
+}
 #register
 {
     background-color: rgb(222,5,0);
     color: white;
 }
-
+#register:hover{
+    box-shadow: 0px 2px 4px 5px rgba(0,0,0,0.3);;
+}
 #logo
 {
     height: 280px;

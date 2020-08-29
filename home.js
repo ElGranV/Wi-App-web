@@ -53,6 +53,7 @@ backToHome.append(homeLogo);
 
 
 
+
 //Pour afficher les textinputs de connexion
 connect_button.addEventListener("click", ()=>{
     inputs.password.style.marginBottom = "5px";
@@ -80,6 +81,8 @@ register_button.addEventListener("click", ()=>{
     }
     div.append(button_sumbitRegister);});
 });
+
+register_button.addEventListener("hover", ()=>{console.log("hover")});
 
 
 //connexion
