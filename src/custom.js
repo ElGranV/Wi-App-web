@@ -38,15 +38,27 @@ function MyAnimatedRect(top, left, largeur, hauteur, couleur = "white", ombre = 
     return rect;
 
 }
-
-function toCenter(rect)
+//Metaclasse qui sert de gestionnaire de positionnement
+class Position
+{
+static toMiddle(rect)
 {
     rWidth = rect.style.width.slice(0, -2);
     rWidth = parseInt(rWidth);
     rect.style.left = ((window.innerWidth-rWidth)/2) + "px";
 }
+static toCenter(rect)
+{
+    rWidth = rect.style.width.slice(0, -2);
+    rWidth = parseInt(rWidth);
+    rect.style.left = ((window.innerWidth-rWidth)/2) + "px";
 
-function toTopRight(rect)
+    rHeight = rect.style.height.slice(0, -2);
+    rHeight = parseInt(rHeight);
+    rect.style.top = ((window.innerHeight-rHeight)/2) + "px";
+}
+
+static toTopRight(rect)
 {
     rect.style.top = "15px";
     rWidth = rect.style.width.slice(0, -2);
@@ -54,11 +66,47 @@ function toTopRight(rect)
     rect.style.left = ((window.innerWidth-rWidth-30)) + "px";
 }
 
-function toTopLeft(rect)
+static toTopLeft(rect)
 {
     rect.style.top = "15px";
     rWidth = rect.style.width.slice(0, -2);
     rWidth = parseInt(rWidth);
     rect.style.left = "30px";
 }
-var a = 2;
+static toRight(rect)
+{
+    Position.toCenter(rect);
+    rWidth = rect.style.width.slice(0, -2);
+    rWidth = parseInt(rWidth);
+    rect.style.left = ((window.innerWidth-rWidth-30)) + "px";
+
+}
+}
+
+
+
+
+
+function drawWib(ctx, x = 10, y = 10, x0 = 10, y0=10)
+{
+    
+    
+    if (x!=100)
+    {
+            x++;
+            y+=2;
+            ctx.beginPath();
+            ctx.moveTo(x0,y0);
+            ctx.lineCap = "round";
+            ctx.lineWidth = 5;
+            ctx.lineTo(x,y);
+            ctx.strokeStyle = "black";
+            ctx.closePath();
+            ctx.stroke();
+            x0=x;
+                        y0=y;
+            setTimeout(()=>drawWib(ctx,x,y,x0,y0), 10);
+    
+    }
+        
+}
