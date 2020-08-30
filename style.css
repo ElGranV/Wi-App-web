@@ -75,6 +75,7 @@ textarea:focus, input:focus, button:focus{
     border-style: outset;
     padding-left: 10px;
     font-size: 18px;
+    transition-duration: 0.4s;
 
 }
 
