@@ -12,9 +12,11 @@ register_button.addEventListener("click", ()=>{
     );
 
     let can = document.createElement("canvas");
+    //can.style.position = "absolute";
+    can.style.width = '300px';
+    can.style.height = "300px";
     can.style.position = "absolute";
-    can.style.top = "50px";
-    can.style.left = "50px";
+    Position.toTopLeft(can);
     document.querySelector("body").append(can);
     let ctx = can.getContext('2d');
     drawWib(ctx);
