@@ -5,6 +5,14 @@ body {
     background-repeat:no-repeat;
     
     }
+@media screen and (max-width: 700px)
+{
+    body
+    {
+        background-size: auto 50%;
+    }
+}
+
 textarea:focus, input:focus, button:focus{
         outline: none;
     }

@@ -1,5 +1,31 @@
 const red = "rgb(222,5,0)";
 const shadow = "0px 3px 3px 4px rgba(0,0,0,0.1)";
+const mobile = window.navigator.platform!=="Win32" && (Math.min(window.outerWidth,window.outerHeight))<=700;
+
+function adjustSizeForMobile()
+{
+    let body = document.querySelector("body");
+        body.style.backgroundSize = "auto 2000px";
+        let logo = document.getElementById("logo");
+        logo.style.height = "380px";
+        logo.style.width = "500px";
+        document.getElementById("all").style.marginTop = "150px";
+        document.getElementById("wiapp").style.color = "white";
+        document.getElementById("wiapp").style.marginBottom = "100px";
+        let buttons = document.getElementsByClassName("button");
+        for (let b of buttons)
+        {
+            b.style.width = "70%";
+            b.style.height = "70px"
+        }
+        let inputs = document.querySelectorAll("input");
+        for (let i of inputs)
+        {
+            i.style.width = "70%";
+            i.style.height = "70px";
+        }
+}
+
 function MyButton(titre, command = ()=>{}, couleur = red, bg = "white")
 {
     let bouton = document.createElement("button");
@@ -8,7 +34,7 @@ function MyButton(titre, command = ()=>{}, couleur = red, bg = "white")
     bouton.style.backgroundColor = bg;
     bouton.textContent = titre;
     bouton.addEventListener("click", command);
-    return bouton;s
+    return bouton;
     
 }
 
@@ -20,22 +46,40 @@ function MyInput(placeholder = "")
     
     return input;
 }
-
+function MyRect(largeur, hauteur, couleur = "white", ombre = false)
+{
+    if (typeof largeur !=="string") largeur = largeur + "px";
+    if (typeof hauteur !=="string") hauteur = hauteur + "px";
+    let rect = document.createElement("div");
+    rect.style.backgroundColor = couleur;
+    if (ombre) rect.style.boxShadow = shadow;
+    rect.style.width = largeur;
+    rect.style.height = hauteur;
+    return rect;
+}
 function MyAnimatedRect(top, left, largeur, hauteur, couleur = "white", ombre = false)
 {
     top = top + "px";
     left = left + "px";
-    if (typeof largeur !=="string") largeur = largeur + "px";
-    if (typeof hauteur !=="string") hauteur = hauteur + "px";
-    let rect = document.createElement("div");
+    let rect = MyRect(largeur, hauteur, couleur, ombre);
     rect.style.position = "absolute";
-    rect.style.backgroundColor = couleur;
-    if (ombre) rect.style.boxShadow = shadow;
     rect.style.top = top;
     rect.style.left = left;
-    rect.style.width = largeur;
-    rect.style.height = hauteur;
     return rect;
+    
+}
+function MyProjectView(projet)
+{
+    let area = MyRect(window.outerWidth/6, window.outerWidth/6, "white", true);
+    let titleSpan = document.createElement("span");
+    titleSpan.style.fontWeight = "bold";
+    titleSpan.innerHTML = projet.nom+"<br>";
+    area.append(titleSpan);
+    area.innerHTML += "<hr width='100%'>";
+    area.innerHTML += projet.description;
+    area.className = "vue_projet";
+    area.style.flexDirection = "column";
+    return area;
 
 }
 //Metaclasse qui sert de gestionnaire de positionnement
@@ -186,8 +230,8 @@ function drawWib(ctx, x = 10, y = 10,begun = false)
             }
                 else {
                     clearInterval(id);
-                    ctx.canvas.style.height = "100px";
-                    ctx.canvas.style.width = "100px";
+                    ctx.canvas.style.height = "200px";
+                    ctx.canvas.style.width = "200px";
 
                 }
             }, 30);

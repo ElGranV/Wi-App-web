@@ -1,0 +1,26 @@
+body
+{
+    background: url(images/background4.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+#projets
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+}
+.vue_projet
+{
+    position: relative;
+    font-family: "Consolas";
+    display: flex;
+    flex-direction: "column";
+    align-items: center;
+    margin: 10px;
+
+}
