@@ -1,28 +1,28 @@
 const red = "rgb(222,5,0)";
 const shadow = "0px 3px 3px 4px rgba(0,0,0,0.1)";
-const mobile = window.navigator.platform!=="Win32" && (Math.min(window.outerWidth,window.outerHeight))<=700;
+const mobile = window.navigator.platform!=="Win32" && (Math.min(window.outerWidth,window.outerHeight))<=800;
 
 function adjustSizeForMobile()
 {
     let body = document.querySelector("body");
-        body.style.backgroundSize = "auto 2000px";
+        body.style.backgroundSize = "1000px 2000px";
         let logo = document.getElementById("logo");
-        logo.style.height = "380px";
-        logo.style.width = "500px";
-        document.getElementById("all").style.marginTop = "150px";
-        document.getElementById("wiapp").style.color = "white";
+        logo.style.height = "450px";
+        logo.style.width = "590px";
+        document.getElementById("all").style.marginTop = "70px";
         document.getElementById("wiapp").style.marginBottom = "100px";
         let buttons = document.getElementsByClassName("button");
         for (let b of buttons)
         {
             b.style.width = "70%";
-            b.style.height = "70px"
+            b.style.height = "70px";
+            b.style.fontSize = "27px";
         }
         let inputs = document.querySelectorAll("input");
-        for (let i of inputs)
+        for (let input of inputs)
         {
-            i.style.width = "70%";
-            i.style.height = "70px";
+            input.style.width = "70%";
+            input.style.height = "70px";
         }
 }
 
@@ -125,6 +125,12 @@ static toRight(rect)
     rect.style.left = ((window.innerWidth-rWidth-30)) + "px";
 
 }
+static toBottom(rect)
+{
+    let rHeight = rect.style.height.slice(0,-2);
+    rHeight = parseInt(rHeight);
+    rect.style.top = (window.innerHeight - rHeight- 30)+"px";
+}
 }
 
 
@@ -156,7 +162,7 @@ function drawWib(ctx, x = 10, y = 10,begun = false)
         return setTimeout(()=>drawWib(ctx,x,y, true), time);
 
     }
-    //Début du W
+    //DÃ©but du W
     if (x <= steps[0])
     {
         clearTimeout(id);    
@@ -230,8 +236,8 @@ function drawWib(ctx, x = 10, y = 10,begun = false)
             }
                 else {
                     clearInterval(id);
-                    ctx.canvas.style.height = "200px";
-                    ctx.canvas.style.width = "200px";
+                    if(!mobile){ctx.canvas.style.height = "200px";
+                    ctx.canvas.style.width = "200px";}
 
                 }
             }, 30);

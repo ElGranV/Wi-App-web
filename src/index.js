@@ -20,8 +20,18 @@ register_button.addEventListener("click", ()=>{
     //can.style.position = "absolute";
     can.style.width = '300px';
     can.style.height = "300px";
+    if (mobile)
+    {
+        can.style.width = '500px';
+        can.style.height = "500px";
+    }
     can.style.position = "absolute";
-    Position.toTopLeft(can);
+    if(mobile) 
+    {
+        Position.toMiddle(can);
+        Position.toBottom(can);
+    }
+    else Position.toTopLeft(can);
     document.querySelector("body").append(can);
     let ctx = can.getContext('2d');
     drawWib(ctx);
