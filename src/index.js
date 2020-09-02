@@ -34,14 +34,18 @@ register_button.addEventListener("click", ()=>{
     else Position.toTopLeft(can);
     document.querySelector("body").append(can);
     let ctx = can.getContext('2d');
-    drawWib(ctx);
+    drawWib(ctx, ()=>{
+        if(!mobile){can.style.height = "200px";
+                    can.style.width = "200px";}
+    });
+    
     }
 
 function init()
 {
     if (mobile)
     {
-        adjustSizeForMobile();
+        adjustAuthPageForMobile();
     }
     wibAnimation();
 }

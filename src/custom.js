@@ -1,30 +1,6 @@
 const red = "rgb(222,5,0)";
 const shadow = "0px 3px 3px 4px rgba(0,0,0,0.1)";
-const mobile = window.navigator.platform!=="Win32" && (Math.min(window.outerWidth,window.outerHeight))<=800;
-
-function adjustSizeForMobile()
-{
-    let body = document.querySelector("body");
-        body.style.backgroundSize = "1000px 2000px";
-        let logo = document.getElementById("logo");
-        logo.style.height = "450px";
-        logo.style.width = "590px";
-        document.getElementById("all").style.marginTop = "70px";
-        document.getElementById("wiapp").style.marginBottom = "100px";
-        let buttons = document.getElementsByClassName("button");
-        for (let b of buttons)
-        {
-            b.style.width = "70%";
-            b.style.height = "70px";
-            b.style.fontSize = "27px";
-        }
-        let inputs = document.querySelectorAll("input");
-        for (let input of inputs)
-        {
-            input.style.width = "70%";
-            input.style.height = "70px";
-        }
-}
+const bigShadow = "0px 2px 4px 5px rgba(0,0,0,0.3)";
 
 function MyButton(titre, command = ()=>{}, couleur = red, bg = "white")
 {
@@ -79,6 +55,8 @@ function MyProjectView(projet)
     area.innerHTML += projet.description;
     area.className = "vue_projet";
     area.style.flexDirection = "column";
+    
+    
     return area;
 
 }
@@ -137,9 +115,9 @@ static toBottom(rect)
 
 let id = -1;
 let i = 0;
-function drawWib(ctx, x = 10, y = 10,begun = false)
+function drawWib(ctx,callback = null, x = 10, y = 10,begun = false)
 {
-    let steps = [60,80,100,129]
+    let steps = [60,80,100,129];
     if (!begun) 
     {
         ctx.beginPath();
@@ -149,41 +127,27 @@ function drawWib(ctx, x = 10, y = 10,begun = false)
         ctx.lineWidth = 5;
     }
     
-    function uniqueStep()
-    {
-        ctx.lineTo(x,y);
-        ctx.stroke();
-    }
     function step(xStep, yStep, time)
     {
         x+=xStep;
         y += yStep;
-        uniqueStep();
-        return setTimeout(()=>drawWib(ctx,x,y, true), time);
-
+        ctx.lineTo(x,y);
+        ctx.stroke();
+        return setTimeout(()=>drawWib(ctx,callback, x,y,true), time);
     }
-    //DÃ©but du W
-    if (x <= steps[0])
+    function line(xStep, yStep, time)
     {
-        clearTimeout(id);    
-        id = step(1,1,8)
+        clearTimeout(id);
+        id = step(xStep, yStep, time);
     }
-    if (x> steps[0] && x <= steps[1])
-        {
-            clearTimeout(id);
-            id = step(1,-1.5,10);
-        }
-        if (x> steps[1] && x <= steps[2])
-        {
-            clearTimeout(id);
-            id = step(1,1.5,10);
+    if (x <= steps[0]) line(1,1,8);
+    if (x> steps[0] && x <= steps[1]) line(1,-1.5,10);
+    if (x> steps[1] && x <= steps[2])line(1,1.5,10);
 
-        }
-        if (x> steps[2] && x <= steps[3])
+    if (x> steps[2] && x <= steps[3])
         {
             ctx.lineCap = "square";
-            clearTimeout(id);
-            id = step(1,-1.1, 15);
+            line(1,-1.1,15);
             if (x===steps[3]+1)
             {
                 x+=25;
@@ -191,13 +155,8 @@ function drawWib(ctx, x = 10, y = 10,begun = false)
                 ctx.moveTo(x,y);
             }
         }
-        //Fin du W
-        //Debut du I
-        if (x > steps[3] && y <= 65)
-        {            
-            clearTimeout(id);
-            id = step(0,1,10);
-        }
+        if (x > steps[3] && y <= 65)line(0,1,10);
+
         if (x>steps[3] && y >=64)
         {
             
@@ -236,8 +195,7 @@ function drawWib(ctx, x = 10, y = 10,begun = false)
             }
                 else {
                     clearInterval(id);
-                    if(!mobile){ctx.canvas.style.height = "200px";
-                    ctx.canvas.style.width = "200px";}
+                    if (callback) callback();
 
                 }
             }, 30);

@@ -5,8 +5,8 @@ button_connect.addEventListener("click", ()=>{
   let id = input_id.nodeValue;
   let pass  =input_password.value;
   console.log(pass);
-  //login(id, pass, ()=>{indow.location = "home.html"})
+  //login(id, pass, ()=>{window.location = "home.html"})
   window.location  = "home.html"
 })
 
-window.onload = adjustSizeForMobile;
+if(mobile) window.onload = adjustAuthPageForMobile;

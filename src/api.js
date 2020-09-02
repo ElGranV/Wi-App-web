@@ -1,5 +1,5 @@
 const token = "PPlaFk63u4E6";
-async function login (id, pass)
+async function login (id, pass, success_callback = null, fail_callback = null)
 {
   let data = new FormData();
   data.append("identifiant", id);
@@ -12,9 +12,16 @@ async function login (id, pass)
     'Content-Type': "multipart/form-data"
   },
   body: data,
-}).then((reponse)=>reponse.text()).then((text)=>console.log(text)).then(
-    ()=>{user={id:"Aristote", pseudo:"C18"}; window.location = "./home.html";}).catch(
-    (error)=>{console.log(error)});*/
+}).then((reponse)=>reponse.text()).then((text)=>{
+  if(success_callback)
+  {
+    success_callback(text)
+  }}).catch((error)=>{
+    if (fail_callback)
+    {
+      fail_callback(error);
+    }
+  });*/
     window.location = "home.js";
 };
 async function test (id, pass)
