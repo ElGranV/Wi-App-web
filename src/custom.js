@@ -55,7 +55,13 @@ function MyProjectView(projet)
     area.innerHTML += projet.description;
     area.className = "vue_projet";
     area.style.flexDirection = "column";
-    
+    area.addEventListener("mouseover",()=>{
+        area.style.transitionDuration = "0.1s";
+        area.style.boxShadow = bigShadow;
+    });
+    area.addEventListener("mouseout", ()=>{
+        area.style.boxShadow = shadow;
+    })
     
     return area;
 
