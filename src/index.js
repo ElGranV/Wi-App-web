@@ -31,7 +31,19 @@ register_button.addEventListener("click", ()=>{
         Position.toMiddle(can);
         Position.toBottom(can);
     }
-    else Position.toTopLeft(can);
+    else 
+    {
+        Position.toTopLeft(can);
+        can.pos = "left";
+        can.addEventListener("mouseover", ()=>{
+            if (!mobile)
+            {
+                (can.pos==="left")?Position.toTopRight(can):Position.toTopLeft(can);
+                can.pos = (can.pos==="left")?"right":"left";
+            }
+        })
+    }
+
     document.querySelector("body").append(can);
     let ctx = can.getContext('2d');
     drawWib(ctx, ()=>{

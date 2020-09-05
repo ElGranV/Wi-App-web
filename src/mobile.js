@@ -1,5 +1,6 @@
 const mobile = window.navigator.platform!=="Win32" && (Math.min(window.outerWidth,window.outerHeight))<=800;
 
+//fonction qui permet d'ajuster les composant des pages d'authentification (se connecter, s'inscrire ...etc.) pour un petit écran (mobile)
 function adjustAuthPageForMobile()
 {
     let body = document.querySelector("body");
@@ -24,4 +25,12 @@ function adjustAuthPageForMobile()
             input.style.height = "70px";
             input.style.borderRadius = "50px";
         }
+}
+
+//fonction qui permet d'ajuster les composant de la page d'accueil pour mobile
+function adjustHomePageForMobile()
+{
+    let body = document.querySelector('body');
+    body.style.backgroundSize = "1000px 2000px";
+
 }

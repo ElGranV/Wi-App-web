@@ -5,7 +5,7 @@ async function login (id, pass, success_callback = null, fail_callback = null)
   data.append("identifiant", id);
   data.append("pass", pass);
   data.append("token", token);
-  /*fetch('http://www.wi-bash.fr/application/login.php', {
+  fetch('http://www.wi-bash.fr/application/login.php', {
   method: 'POST',
   headers: {
     Accept: 'multipart/form-data',
@@ -21,24 +21,8 @@ async function login (id, pass, success_callback = null, fail_callback = null)
     {
       fail_callback(error);
     }
-  });*/
-    window.location = "home.js";
+  });
 };
-async function test (id, pass)
-{
-  let data = new FormData();
-  data.append("cou", "chiote");
-  fetch('http://www.wi-bash.fr/application/debug.php', {
-  method: 'POST',
-  headers: {
-    Accept: 'multipart/form-data',
-    'Content-Type': "multipart/form-data"
-  },
-  body: data,
-}).then((reponse)=>reponse.text()).then((text)=>console.log(text)).catch(
-    (error)=>{console.log(error)});
-};
-
 
 /*
 export async function changeMyInfo(id, pass, action, new_value)

@@ -1,6 +1,8 @@
 const red = "rgb(222,5,0)";
 const shadow = "0px 3px 3px 4px rgba(0,0,0,0.1)";
 const bigShadow = "0px 2px 4px 5px rgba(0,0,0,0.3)";
+const defaultImg = "images/default.jpg";
+const test = window.location.hostname!=="www.wi-bash.fr";
 
 function MyButton(titre, command = ()=>{}, couleur = red, bg = "white")
 {
@@ -50,11 +52,22 @@ function MyProjectView(projet)
     let titleSpan = document.createElement("span");
     titleSpan.style.fontWeight = "bold";
     titleSpan.innerHTML = projet.nom+"<br>";
-    area.append(titleSpan);
+    let img = document.createElement("img");
+    if ("image" in projet)
+    {
+        if (projet.image)
+        {
+            img.src = projet.image;
+        }else img.src = defaultImg;
+    }else img.src = defaultImg;
+    if (img.src!==defaultImg)img.style.width = "100%";
+    area.append(img);
     area.innerHTML += "<hr width='100%'>";
+    area.append(titleSpan);
     area.innerHTML += projet.description;
     area.className = "vue_projet";
     area.style.flexDirection = "column";
+
     area.addEventListener("mouseover",()=>{
         area.style.transitionDuration = "0.1s";
         area.style.boxShadow = bigShadow;
@@ -62,6 +75,11 @@ function MyProjectView(projet)
     area.addEventListener("mouseout", ()=>{
         area.style.boxShadow = shadow;
     })
+    if (mobile)
+    {
+        area.style.width = "500px";
+        area.style.height = "500px";
+    }
     
     return area;
 
@@ -118,7 +136,7 @@ static toBottom(rect)
 }
 
 
-
+//Animation qui écrit dynamiquement le logo WiB dans un canvas
 let id = -1;
 let i = 0;
 function drawWib(ctx,callback = null, x = 10, y = 10,begun = false)
@@ -146,6 +164,7 @@ function drawWib(ctx,callback = null, x = 10, y = 10,begun = false)
         clearTimeout(id);
         id = step(xStep, yStep, time);
     }
+    //Debut W
     if (x <= steps[0]) line(1,1,8);
     if (x> steps[0] && x <= steps[1]) line(1,-1.5,10);
     if (x> steps[1] && x <= steps[2])line(1,1.5,10);
@@ -161,11 +180,13 @@ function drawWib(ctx,callback = null, x = 10, y = 10,begun = false)
                 ctx.moveTo(x,y);
             }
         }
+        //fin W
+        //Debut I
         if (x > steps[3] && y <= 65)line(0,1,10);
-
         if (x>steps[3] && y >=64)
         {
             
+            //point du i
             ctx.lineWidth = 10;
             ctx.stroke();
             clearTimeout(id);
@@ -176,7 +197,7 @@ function drawWib(ctx,callback = null, x = 10, y = 10,begun = false)
             ctx.arc(x, y, 6, 0, 2*Math.PI);
             ctx.fill();
             //Fin du I (avec point)
-
+            //Debut du B
             ctx.canvas.style.transitionDuration = "2s";
             ctx.beginPath();
             ctx.strokeStyle = "rgba(0,0,0,0)";
@@ -192,6 +213,7 @@ function drawWib(ctx,callback = null, x = 10, y = 10,begun = false)
             ctx.bezierCurveTo(170,15, 280, 20, 185, 40);
             ctx.moveTo(185, 40);
             ctx.bezierCurveTo(185, 40, 280,40,180,65);
+            //fin du B
 
             id = setInterval(()=>{
                 if (alpha<0.8)
